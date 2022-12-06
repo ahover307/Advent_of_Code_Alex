@@ -12,20 +12,19 @@ def part1(window, input):
 
     for line in input:
         for i, l in enumerate(line):
-            if i < window-1:
+            if i < window - 1:
                 continue
 
-            sub = line[i-window+1:i+1]
+            sub = line[i - window + 1:i + 1]
             flag = False
 
             for j in range(window):
-                if sub.count(line[i-j]) > 1:
+                if sub.count(line[i - j]) > 1:
                     flag = True
-
 
             if flag: continue
 
-            print(i+1)
+            print(i + 1)
             break
 
 
@@ -39,8 +38,8 @@ print("Real")
 start = datetime.datetime.now()
 part1(4, lines)
 end = datetime.datetime.now()
-print(end-start)
+print(end - start)
 start = datetime.datetime.now()
 part1(14, lines)
 end = datetime.datetime.now()
-print(end-start)
+print(end - start)
