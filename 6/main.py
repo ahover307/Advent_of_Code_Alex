@@ -19,7 +19,6 @@ def part1(window, input):
             flag = False
 
             for j in range(window):
-                # Will false fail by detecting itself
                 if sub.count(line[i-j]) > 1:
                     flag = True
 
