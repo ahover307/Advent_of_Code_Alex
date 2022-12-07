@@ -1,10 +1,17 @@
 import collections
+import datetime
 
 test_input = open('test_input.txt', 'r')
 test_lines = test_input.readlines()
 
 input_file = open('input.txt', 'r')
 lines = input_file.readlines()
+
+input_big = open('bigger.txt', 'r')
+big_lines = input_big.readlines()
+
+input_biggest = open('biggest.txt', 'r')
+biggest_lines = input_biggest.readlines()
 
 
 def parse_input(input):
@@ -30,6 +37,8 @@ def parse_input(input):
         counter = 1
         while True:
             if len(i) < counter:
+            # if you are running the big files, flip the commented ifs
+            # if len(i)-1 < counter:
                 break
             if i[counter] != ' ':
                 output[index].append(i[counter])
@@ -112,3 +121,18 @@ print()
 print("Real")
 part1(lines)
 part2(lines)
+
+print()
+
+# print("big")
+# start = datetime.datetime.now()
+# part1(big_lines)
+# end = datetime.datetime.now()
+# print(end - start)
+
+# print()
+# print("biggest")
+# start = datetime.datetime.now()
+# part1(biggest_lines)
+# end = datetime.datetime.now()
+# print(end - start)
