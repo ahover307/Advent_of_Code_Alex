@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import datetime
+
 from progress.bar import Bar
 
 test_input = open('test_input.txt', 'r')
@@ -19,17 +20,16 @@ class Snake:
     y: int
     child_leg: Snake
     movement: int
-    space_hit:[(int, int)]
+    space_hit: [(int, int)]
 
     def __init__(self, x, y, length_of_snake):
         self.x = x
         self.y = y
         self.movement = 1
-        self.space_hit = [(0, 0)] # because of the starting square
+        self.space_hit = [(0, 0)]  # because of the starting square
         self.name = length_of_snake
         if length_of_snake > 1:
             self.child_leg = Snake(x, y, length_of_snake - 1)
-
 
     def snake_length(self):
         try:
@@ -43,6 +43,18 @@ class Snake:
             return self.child_leg.get_tail_total_movement()
         except AttributeError:
             return self.movement
+
+    def get_all_nodes_movements(self):
+        try:
+            return self.child_leg.get_all_nodes_movements() + self.movement
+        except AttributeError:
+            return self.movement
+
+    def get_all_nodes_unique_movements(self):
+        try:
+            return self.child_leg.get_all_nodes_movements() + len(self.space_hit)
+        except AttributeError:
+            return len(self.space_hit)
 
     def get_tail_unique_movement(self):
         try:
@@ -99,7 +111,6 @@ class Snake:
             self.check_children(parent)
         elif abs(parent.y - self.y) == 2:
             self.check_children(parent)
-
 
     def move_right(self):
         self.x += 1
@@ -165,6 +176,8 @@ def solution(input: [str], part: int, length_of_snake: int):
         bar.next()
     bar.finish()
 
+    print("Unique Moves: {}".format(snake.get_all_nodes_unique_movements()))
+    print("Total Moves: {}".format(snake.get_all_nodes_movements()))
     print('Total score: {}'.format(snake.get_tail_unique_movement()))
 
 
